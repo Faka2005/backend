@@ -30,29 +30,73 @@
             <tr>
                 <th>Route</th>
                 <th>Description</th>
+                <th>Détails</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>/</td>
-                <td>Affiche un message indiquant que l'API est en cours d'exécution</td>
+                <td>Affiche les données disponibles</td>
+                <td>Page principale</td>
             </tr>
             <tr>
                 <td>/courses</td>
                 <td>Récupère la liste des cours disponibles</td>
+                <td id="courses-data">Chargement...</td>
             </tr>
             <tr>
                 <td>/exercice</td>
                 <td>Récupère la liste des exercices disponibles</td>
+                <td id="exercice-data">Chargement...</td>
             </tr>
             <tr>
                 <td>/outils</td>
-                <td></td>
+                <td>Récupère la liste des outils disponibles</td>
+                <td id="outils-data">Chargement...</td>
             </tr>
         </tbody>
     </table>
-</body>
-<script>
 
-</script>
+    <script>
+        // URL de l'API backend
+        const apiBaseUrlcourse = 'https://backend-lp36.onrender.com/courses'; 
+        const apiBaseUrlexercice = 'https://backend-lp36.onrender.com/exercice'; 
+        const apiBaseUrloutils = 'https://backend-lp36.onrender.com/outils'; 
+
+
+        // Fonction pour récupérer et afficher les cours
+        fetch(apiBaseUrlcourse)
+            .then(response => response.json())
+            .then(courses => {
+                const coursesList = courses.map(course => `<li>${course.title}</li>`).join('');
+                document.getElementById('courses-data').innerHTML = `<ul>${coursesList}</ul>`;
+                console.log("OUi")
+            })
+            .catch(() => {
+                document.getElementById('courses-data').innerText = 'Erreur lors de la récupération des cours';
+            });
+
+        // Fonction pour récupérer et afficher les exercices
+        fetch(apiBaseUrlexercice)
+            .then(response => response.json())
+            .then(exercices => {
+                const exerciceList = exercices.map(ex => `<li>Niveau ${ex.niveau}: ${ex.title_execice}</li>`).join('');
+                document.getElementById('exercice-data').innerHTML = `<ul>${exerciceList}</ul>`;
+            })
+            .catch(() => {
+                document.getElementById('exercice-data').innerText = 'Erreur lors de la récupération des exercices';
+            });
+
+        // Exemple fictif pour les outils (ou implémenter une vraie API)
+        fetch(apiBaseUrloutils)
+            .then(response => response.json())
+            .then(outils => {
+                const outilsList = outils.map(outil => `<li>${outil.nom}</li>`).join('');
+                document.getElementById('outils-data').innerHTML = `<ul>${outilsList}</ul>`;
+            })
+            .catch(() => {
+                document.getElementById('outils-data').innerText = 'Erreur lors de la récupération des outils';
+            });
+    </script>
+</body>
 </html>
