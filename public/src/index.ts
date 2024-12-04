@@ -8,8 +8,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: 'https://learning-lumnie.vercel.app/', // Mettez l'URL du frontend
-  methods: 'GET, POST',
+  origin: ['https://learning-lumnie.vercel.app', 'null'], 
+  methods: ['GET', 'POST'],
 }));
 
 const PORT = process.env.PORT || 5000;
@@ -36,6 +36,17 @@ app.get('/exercice', (req, res)=> {
     { id: 5, title_execice: 'Nombre Complexe',niveau:5 },
   ];
   res.json(exercice);
+});
+
+app.get('/outils',(req,res)=>{
+  const outils = [
+    { id: 1, title: 'Fusionneur', description: 'Fusionner plusieurs fichier pdf'},
+    { id: 2, title: 'Compresser', description: 'Compresser fichier'},
+    { id: 3, title: 'Convertisseur de fichier', description: 'Convertir des formats de documents'},
+    { id: 4, title: 'Analyseur', description: 'Analyser un texte'},
+    { id: 5, title: 'Editeur', description: 'Editer un texte'},
+    { id: 6, title: "Convertisseur d'unité", description: 'Convertir des unités'}
+  ];res.json(outils);
 });
 
 app.listen(PORT, () => {
