@@ -15,7 +15,7 @@ app.use(cors({
 const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './index.html')); // Utilisation correcte de __dirname
+  res.send('API is running');//Je veux qu'il me renvoie ./inddex.html
 });
 app.get('/courses', (req, res) => {
   const courses = [
