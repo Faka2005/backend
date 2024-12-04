@@ -15,7 +15,7 @@ app.use(cors({
 const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html')); // Chemin vers index.html
+  res.sendFile(path.join( 'index.html')); // Chemin vers index.html
 });
 
 app.get('/courses', (req, res) => {
