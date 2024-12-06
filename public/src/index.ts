@@ -1,12 +1,13 @@
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
+
 
 
 
 const app = express();
 
 app.use(express.json());
+
 app.use(cors({
   origin: ['https://learning-lumnie.vercel.app', 'null'], 
   methods: ['GET', 'POST'],
@@ -15,8 +16,9 @@ app.use(cors({
 const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
-  res.send('API is running');//Je veux qu'il me renvoie ./inddex.html
+  res.send('API is running');
 });
+
 app.get('/courses', (req, res) => {
   const courses = [
     { id: 1, theme: 'frontend', title: 'React Basics', description: 'Learn the fundamentals of React.' },
@@ -26,6 +28,7 @@ app.get('/courses', (req, res) => {
   ];
   res.json(courses);
 });
+
 app.get('/exercice', (req, res)=> {
   const exercice = [
     { id: 1, title_execice: 'Nombre Complexe',niveau:1 },
@@ -46,6 +49,12 @@ app.get('/outils',(req,res)=>{
     { id: 5, title: 'Editeur', description: 'Editer un texte'},
     { id: 6, title: "Convertisseur d'unité", description: 'Convertir des unités'}
   ];res.json(outils);
+});
+
+app.get('/user',(req,res)=>{
+  const user = [
+    {name:'admin',password:'admin',status:'adminastrateur'},
+  ];res.json(user)
 });
 
 app.listen(PORT, () => {
