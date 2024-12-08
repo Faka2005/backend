@@ -1,68 +1,71 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import { Course, Exercice, Outil, User } from './models';
-
-dotenv.config();
 
 const app = express();
+
 app.use(express.json());
+
 app.use(cors({
-  origin: ['http://localhost:3000'], // Ajoutez ici l'URL de votre frontend en production
+  origin: ['https://learning-lumnie.vercel.app', 'null'], 
   methods: ['GET', 'POST'],
 }));
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/learning_db';
 
-// Connexion à MongoDB
-mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true } as mongoose.ConnectOptions)
-  .then(() => console.log('Connecté à MongoDB'))
-  .catch(err => console.error('Erreur de connexion à MongoDB :', err));
-
-// Routes
-
-// Récupérer tous les cours
-app.get('/courses', async (req, res) => {
-  try {
-    const courses = await Course.find();
-    res.json(courses);
-  } catch (err) {
-    res.status(500).send('Erreur lors de la récupération des cours');
-  }
+app.get('/', (req, res) => {
+  res.send('API is running');
 });
 
-// Récupérer tous les exercices
-app.get('/exercice', async (req, res) => {
-  try {
-    const exercices = await Exercice.find();
-    res.json(exercices);
-  } catch (err) {
-    res.status(500).send('Erreur lors de la récupération des exercices');
-  }
+app.get('/courses', (req, res) => {
+  const courses = [
+    { id: 1, theme: 'frontend', title: 'React Basics', description: 'Learn the fundamentals of React.' },
+    { id: 2, theme: 'frontend', title: 'TypeScript for Beginners', description: 'Understand TypeScript essentials.' },
+    { id: 3, theme: 'backend', title: 'Node.js Essentials', description: 'Master the basics of Node.js.' },
+    { id: 4, theme: 'mathématique', title: 'Nombre Complexe', description: 'Apprendre les nombres complexes.' }
+  ];
+  res.json(courses);
 });
 
-// Récupérer tous les outils
-app.get('/outils', async (req, res) => {
-  try {
-    const outils = await Outil.find();
-    res.json(outils);
-  } catch (err) {
-    res.status(500).send('Erreur lors de la récupération des outils');
-  }
+app.get('/exercice', (req, res)=> {
+  const exercice = [
+    { id: 1, title_execice: 'Nombre Complexe',niveau:1 },
+    { id: 2, title_execice: 'Nombre Complexe',niveau:2 },
+    { id: 3, title_execice: 'Nombre Complexe',niveau:3 },
+    { id: 4, title_execice: 'Nombre Complexe',niveau:4 },
+    { id: 5, title_execice: 'Nombre Complexe',niveau:5 },
+  ];
+  res.json(exercice);
 });
 
-// Récupérer tous les utilisateurs
-app.get('/user', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).send('Erreur lors de la récupération des utilisateurs');
-  }
+app.get('/outils',(req,res)=>{
+  const outils = [
+    { id: 1, title: 'Fusionneur', description: 'Fusionner plusieurs fichier pdf'},
+    { id: 2, title: 'Compresser', description: 'Compresser fichier'},
+    { id: 3, title: 'Convertisseur de fichier', description: 'Convertir des formats de documents'},
+    { id: 4, title: 'Analyseur', description: 'Analyser un texte'},
+    { id: 5, title: 'Editeur', description: 'Editer un texte'},
+    { id: 6, title: "Convertisseur d'unité", description: 'Convertir des unités'}
+  ];res.json(outils);
+});
+
+app.get('/user',(req,res)=>{
+  const user = [
+    {name:'admin',password:'admin',status:'adminastrateur'},
+  ];res.json(user)
+});
+
+app.get('/courses/ficher',(req ,res)=>{
+  const fiche = [
+    { title: 'Fiche 1', theme:'',url: '',  },
+  ];res.json(fiche)
+});
+
+app.get('/exercice/ficher',(req ,res)=>{
+  const fiche = [
+    { title: 'Fiche 1', theme:'',url: '',  },
+  ];res.json(fiche)
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log("Server is running on port ",{PORT});
 });
