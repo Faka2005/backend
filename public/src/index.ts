@@ -21,7 +21,8 @@ app.get('/courses', (req, res) => {
     { id: 1, theme: 'frontend', title: 'React Basics', description: 'Learn the fundamentals of React.' },
     { id: 2, theme: 'frontend', title: 'TypeScript for Beginners', description: 'Understand TypeScript essentials.' },
     { id: 3, theme: 'backend', title: 'Node.js Essentials', description: 'Master the basics of Node.js.' },
-    { id: 4, theme: 'mathématique', title: 'Nombre Complexe', description: 'Apprendre les nombres complexes.' }
+    { id: 4, theme: 'mathématique', title: 'Nombre Complexe', description: 'Apprendre les nombres complexes.' },
+    { id: 5, theme: 'Physique',title:"Amplificateur opérationnel",description:''},
   ];
   res.json(courses);
 });
