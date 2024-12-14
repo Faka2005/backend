@@ -36,7 +36,7 @@ app.use(morgan("dev")); // Logger les requêtes
 // Configurer CORS pour autoriser les requêtes provenant de sources spécifiques
 app.use(
   cors({
-    origin: ["https://learning-lumnie.vercel.app", "http://localhost:3000"],
+    origin: ["https://learning-lumnie.vercel.app", ],
     methods: ["GET", "POST"],
   })
 );
